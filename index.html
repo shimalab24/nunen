@@ -1,0 +1,1119 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="今帰仁・今泊のフクギ集落にある、一棟貸し古民家nunen。">
+  <title>nunen | 今帰仁・今泊の一棟貸し古民家</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&amp;family=Noto+Serif+JP:wght@400&amp;family=Zen+Old+Mincho:wght@500;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --night: #15181e;
+      --night-2: #1c2026;
+      --washi: #f4f0e6;
+      --washi-dim: #a9a498;
+      --akari: #c9924a;
+      --fukugi: #33503f;
+      --line: rgba(244, 240, 230, .14);
+      --ink: #23241f;
+      --ink-dim: #6b675c;
+      --line-ink: rgba(35, 36, 31, .14);
+      --t-label: 12px;
+      --t-body: clamp(1rem, .95rem + .2vw, 1.0625rem);
+      --t-h3: clamp(1.125rem, 1rem + .5vw, 1.375rem);
+      --t-h2: clamp(1.5rem, 1.15rem + 1.4vw, 2.125rem);
+      --t-h1: clamp(1.875rem, 1.5rem + 2vw, 3rem);
+      --pad-section: clamp(96px, 12vw, 160px);
+      --col: 32em;
+      --container: 1120px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      border-radius: 0;
+    }
+
+    html {
+      background: var(--night);
+      scroll-behavior: smooth;
+    }
+
+    html[lang="en"] .ja {
+      display: none;
+    }
+
+    html[lang="ja"] .en {
+      display: none;
+    }
+
+    body {
+      margin: 0;
+      min-width: 0;
+      overflow-x: clip;
+      background: var(--night);
+      color: var(--washi);
+      font-family: "Noto Serif JP", serif;
+      font-size: var(--t-body);
+      font-weight: 400;
+      line-height: 2;
+      word-break: normal;
+      overflow-wrap: normal;
+      line-break: strict;
+      text-wrap: pretty;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1,
+    h2,
+    h3,
+    p,
+    blockquote,
+    figure {
+      margin: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      overflow-wrap: normal;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .nowrap {
+      white-space: nowrap;
+    }
+
+    .h-display {
+      font-family: "Zen Old Mincho", serif;
+      font-feature-settings: "palt" 1;
+      font-weight: 500;
+      letter-spacing: .1em;
+    }
+
+    .section-inner,
+    .hero__inner {
+      width: min(calc(100% - 64px), var(--container));
+      margin-inline: auto;
+    }
+
+    .section-title {
+      font-size: var(--t-h2);
+      line-height: 1.65;
+    }
+
+    .kicker {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-block: 16px 24px;
+      color: var(--washi-dim);
+      font-family: "EB Garamond", serif;
+      font-size: var(--t-label);
+      font-weight: 500;
+      letter-spacing: .22em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .kicker::before {
+      flex: 0 0 24px;
+      width: 24px;
+      height: 1px;
+      content: "";
+      background: var(--akari);
+    }
+
+    .paper .kicker {
+      color: var(--ink-dim);
+    }
+
+    .demo-banner {
+      position: fixed;
+      z-index: 20;
+      inset: 0 0 auto;
+      display: grid;
+      place-items: center;
+      width: 100%;
+      height: 40px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(21, 24, 30, .96);
+      color: var(--washi-dim);
+      font-family: "EB Garamond", serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .22em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    #lang-toggle {
+      position: absolute;
+      right: 16px;
+      padding: 4px 10px;
+      border: 1px solid var(--line);
+      border-radius: 0;
+      background: transparent;
+      color: var(--washi-dim);
+      font-family: "EB Garamond", serif;
+      font-size: 12px;
+      line-height: 1;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .hero {
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      min-height: 100svh;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    /* 写真差し込み: 夕暮れの外観。建築と室内の灯りを主役にする */
+    .hero__image {
+      position: absolute;
+      z-index: -2;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    .hero::after {
+      position: absolute;
+      z-index: -1;
+      inset: 32% 0 0;
+      content: "";
+      background: linear-gradient(to bottom, rgba(8, 10, 13, 0), rgba(8, 10, 13, .2) 34%, rgba(8, 10, 13, .84) 100%);
+      pointer-events: none;
+    }
+
+    .hero__inner {
+      padding-block: 96px 64px;
+    }
+
+    .hero__copy {
+      max-width: 720px;
+      opacity: 0;
+      animation: hero-fade 900ms ease-out 120ms forwards;
+    }
+
+    .hero h1 {
+      max-width: 16em;
+      font-size: var(--t-h1);
+      line-height: 1.5;
+    }
+
+    .hero__lead {
+      max-width: var(--col);
+      margin-top: 24px;
+      color: rgba(244, 240, 230, .84);
+    }
+
+    .origin,
+    .section-owner {
+      padding-block: clamp(128px, 16vw, 208px);
+      border-top: 1px solid var(--line);
+    }
+
+    .origin__content,
+    .owner__content {
+      display: grid;
+      grid-template-columns: minmax(0, 560px);
+      justify-content: center;
+      text-align: center;
+    }
+
+    .origin .kicker,
+    .section-owner .kicker {
+      justify-content: center;
+    }
+
+    .origin__body,
+    .owner__body {
+      margin-top: 48px;
+      color: var(--washi-dim);
+      text-align: left;
+    }
+
+    .owner__source {
+      margin-top: 24px;
+      color: var(--washi-dim);
+      font-family: "EB Garamond", "Noto Serif JP", serif;
+      font-size: var(--t-label);
+      letter-spacing: .12em;
+      text-align: right;
+    }
+
+    /* 写真差し込み: 白い漆喰屋根とシーサー。余白の中に小さく置く */
+    .origin__image {
+      width: min(100%, 480px);
+      aspect-ratio: 3 / 2;
+      margin: 64px auto 0;
+      object-fit: cover;
+    }
+
+    .day {
+      padding-block: var(--pad-section);
+      border-top: 1px solid var(--line);
+      background: var(--night-2);
+    }
+
+    .day__heading {
+      max-width: 640px;
+      margin-bottom: 96px;
+    }
+
+    .day-list {
+      display: grid;
+      gap: clamp(96px, 12vw, 160px);
+    }
+
+    .day-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
+      align-items: center;
+      gap: clamp(48px, 8vw, 112px);
+    }
+
+    .day-row:nth-child(even) .day-row__figure {
+      order: 2;
+    }
+
+    .day-row:nth-child(even) .day-row__text {
+      order: 1;
+    }
+
+    /* 写真差し込み: 夕方から朝までの時間を、夕景・灯り・朝の縁側でつなぐ */
+    .day-row__image {
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+    }
+
+    .day-row:last-child .day-row__image {
+      aspect-ratio: 4 / 5;
+    }
+
+    .day-row__number {
+      display: block;
+      margin-bottom: 24px;
+      color: var(--akari);
+      font-family: "EB Garamond", serif;
+      font-size: var(--t-label);
+      letter-spacing: .22em;
+    }
+
+    .day-row__text p {
+      max-width: var(--col);
+      color: var(--washi-dim);
+    }
+
+    .paper {
+      position: relative;
+      color: var(--ink);
+      background-color: var(--washi);
+      background-image:
+        radial-gradient(rgba(35, 36, 31, .22) .45px, transparent .55px),
+        radial-gradient(rgba(35, 36, 31, .12) .4px, transparent .5px);
+      background-position: 0 0, 7px 11px;
+      background-size: 13px 13px, 17px 17px;
+    }
+
+    .honesty {
+      padding-block: var(--pad-section);
+    }
+
+    .honesty__grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(240px, 360px);
+      align-items: end;
+      gap: clamp(48px, 8vw, 112px);
+    }
+
+    .honesty__copy {
+      max-width: 640px;
+    }
+
+    .honesty__body {
+      max-width: var(--col);
+      margin-top: 48px;
+      color: var(--ink-dim);
+    }
+
+    .honesty__quote {
+      max-width: 720px;
+      margin-top: 64px;
+      padding: 32px 0 0 32px;
+      border-top: 1px solid var(--line-ink);
+      border-left: 1px solid var(--akari);
+      font-family: "Zen Old Mincho", serif;
+      font-feature-settings: "palt" 1;
+      font-size: var(--t-h3);
+      line-height: 2;
+      letter-spacing: .05em;
+    }
+
+    /* 写真差し込み: 縁側に置かれた蚊取り線香 */
+    .honesty__image {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+    }
+
+    .house {
+      padding-block: var(--pad-section);
+      border-top: 1px solid var(--line);
+    }
+
+    .house__heading {
+      max-width: 640px;
+      margin-bottom: 64px;
+    }
+
+    .house__layout {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      gap: clamp(48px, 8vw, 96px);
+    }
+
+    .house__visuals {
+      display: grid;
+      align-content: start;
+      gap: 32px;
+    }
+
+    /* 写真差し込み: 10畳一間の間取り図と台所 */
+    .house__plan {
+      width: 100%;
+      padding: 24px;
+      background: var(--washi);
+      object-fit: contain;
+    }
+
+    .house__kitchen {
+      width: 72%;
+      aspect-ratio: 3 / 2;
+      margin-left: auto;
+      object-fit: cover;
+    }
+
+    .info-table {
+      margin: 0;
+    }
+
+    .info-row {
+      display: grid;
+      grid-template-columns: 9em minmax(0, 1fr);
+      gap: 24px;
+      padding-block: 20px;
+      border-top: 1px solid var(--line);
+    }
+
+    .info-row:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .info-row dt,
+    .info-row dd {
+      margin: 0;
+    }
+
+    .info-row dt {
+      color: var(--washi-dim);
+      font-family: "Zen Old Mincho", serif;
+      font-feature-settings: "palt" 1;
+      letter-spacing: .08em;
+    }
+
+    .info-row dd {
+      color: var(--washi);
+    }
+
+    .house__note {
+      margin-top: 32px;
+      color: var(--washi-dim);
+      font-size: .9em;
+    }
+
+    .voices {
+      padding-block: var(--pad-section);
+      border-top: 1px solid var(--line);
+    }
+
+    .voices__heading {
+      max-width: 640px;
+      margin-bottom: 64px;
+    }
+
+    .voices__list {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      border-top: 1px solid var(--line);
+    }
+
+    .voice {
+      padding: clamp(40px, 6vw, 72px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .voice + .voice {
+      border-left: 1px solid var(--line);
+    }
+
+    .voice blockquote {
+      font-family: "Zen Old Mincho", serif;
+      font-feature-settings: "palt" 1;
+      font-size: var(--t-h3);
+      line-height: 2;
+      letter-spacing: .05em;
+    }
+
+    .voices__source {
+      margin-top: 32px;
+      color: var(--washi-dim);
+      font-family: "EB Garamond", "Noto Serif JP", serif;
+      font-size: var(--t-label);
+      letter-spacing: .16em;
+    }
+
+    .access {
+      padding-block: var(--pad-section);
+    }
+
+    .access__heading {
+      max-width: 640px;
+      margin-bottom: 64px;
+    }
+
+    .access__layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr);
+      align-items: start;
+      gap: clamp(32px, 5vw, 64px);
+    }
+
+    /* 写真差し込み: Googleマップの正規埋め込み */
+    .map {
+      position: relative;
+      min-height: 560px;
+      overflow: hidden;
+      background: #ddd8cc;
+    }
+
+    .map iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: grayscale(1) contrast(.9) sepia(.14);
+    }
+
+    .access .info-row {
+      grid-template-columns: 8.5em minmax(0, 1fr);
+      border-color: var(--line-ink);
+    }
+
+    .access .info-row:last-child {
+      border-color: var(--line-ink);
+    }
+
+    .access .info-row dt,
+    .access .info-row dd {
+      color: var(--ink);
+    }
+
+    .access .info-row dt {
+      color: var(--ink-dim);
+    }
+
+    .house__room {
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+    }
+
+    .nearby {
+      margin-top: 48px;
+      padding-left: 0;
+      border-top: 1px solid var(--line-ink);
+    }
+
+    .nearby__title {
+      font-size: var(--t-h3);
+      line-height: 1.65;
+    }
+
+    .nearby__list {
+      margin-top: 32px;
+      border-top: 1px solid var(--line-ink);
+    }
+
+    .nearby__item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 80px;
+      gap: 24px;
+      align-items: center;
+      padding-block: 20px;
+      border-bottom: 1px solid var(--line-ink);
+    }
+
+    .nearby__name {
+      font-family: "Zen Old Mincho", serif;
+      font-feature-settings: "palt" 1;
+      letter-spacing: .08em;
+    }
+
+    .nearby__distance {
+      color: var(--ink-dim);
+      font-family: "EB Garamond", "Noto Serif JP", serif;
+      font-size: var(--t-label);
+      letter-spacing: .08em;
+    }
+
+    .nearby__description {
+      margin-top: 4px;
+      color: var(--ink-dim);
+      font-size: .9em;
+      line-height: 1.8;
+    }
+
+    .nearby__image {
+      width: 80px;
+      aspect-ratio: 1;
+      object-fit: cover;
+    }
+
+    .cta {
+      position: relative;
+      padding-block: clamp(128px, 16vw, 208px);
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .cta::before {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      width: min(72vw, 760px);
+      aspect-ratio: 1;
+      content: "";
+      border: 1px solid rgba(201, 146, 74, .12);
+      border-radius: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .cta__inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      justify-items: center;
+    }
+
+    .cta h2 {
+      font-size: var(--t-h2);
+      line-height: 1.65;
+    }
+
+    .cta__button {
+      display: inline-grid;
+      place-items: center;
+      min-width: min(100%, 320px);
+      min-height: 52px;
+      margin-top: 48px;
+      padding: 12px 32px;
+      border: 1px solid var(--akari);
+      background: var(--akari);
+      color: var(--night);
+      font-family: "Zen Old Mincho", serif;
+      font-size: .95rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      line-height: 1.4;
+      text-decoration: none;
+      transition: background-color 180ms ease, color 180ms ease;
+    }
+
+    .cta__button:hover,
+    .cta__button:focus-visible {
+      background: transparent;
+      color: var(--washi);
+    }
+
+    .cta__note {
+      margin-top: 24px;
+      color: var(--washi-dim);
+      font-size: .9em;
+    }
+
+    .footer {
+      padding: 32px;
+      border-top: 1px solid var(--line);
+      color: var(--washi-dim);
+      font-family: "EB Garamond", serif;
+      font-size: 10px;
+      letter-spacing: .18em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 600ms ease-out, transform 600ms ease-out;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes hero-fade {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .day-row,
+      .honesty__grid,
+      .house__layout,
+      .access__layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .day-row:nth-child(even) .day-row__figure,
+      .day-row:nth-child(even) .day-row__text {
+        order: initial;
+      }
+
+      .day-row__text {
+        width: min(100%, var(--col));
+      }
+
+      .honesty__image {
+        width: min(72%, 360px);
+        margin-left: auto;
+      }
+
+      .house__kitchen {
+        width: 68%;
+      }
+
+      .access__layout {
+        gap: 64px;
+      }
+
+      .map {
+        min-height: 440px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .section-inner,
+      .hero__inner {
+        width: calc(100% - 48px);
+      }
+
+      .hero__image {
+        object-position: 46% center;
+      }
+
+      .hero__inner {
+        padding-block: 96px 48px;
+      }
+
+      .hero h1,
+      .section-title {
+        letter-spacing: .08em;
+      }
+
+      .hero__lead {
+        margin-top: 16px;
+        line-height: 1.9;
+      }
+
+      .origin__body,
+      .owner__body {
+        margin-top: 40px;
+      }
+
+      .origin__image {
+        margin-top: 48px;
+      }
+
+      .day__heading {
+        margin-bottom: 64px;
+      }
+
+      .day-list {
+        gap: 96px;
+      }
+
+      .day-row {
+        gap: 32px;
+      }
+
+      .day-row:last-child .day-row__image {
+        aspect-ratio: 3 / 4;
+        object-position: center 58%;
+      }
+
+      .honesty__body {
+        margin-top: 40px;
+      }
+
+      .honesty__quote {
+        margin-top: 48px;
+        padding: 24px 0 0 20px;
+      }
+
+      .honesty__image {
+        width: 76%;
+      }
+
+      .house__plan {
+        padding: 12px;
+      }
+
+      .house__kitchen {
+        width: 76%;
+      }
+
+      .info-row,
+      .access .info-row {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 4px;
+      }
+
+      .voices__list {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .voice {
+        padding: 40px 0;
+      }
+
+      .voice + .voice {
+        border-left: 0;
+      }
+
+      .map {
+        min-height: 360px;
+      }
+
+      .nearby__item {
+        grid-template-columns: minmax(0, 1fr) 80px;
+        gap: 16px;
+      }
+
+      .nearby__image {
+        width: 80px;
+      }
+
+      .cta__button {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-delay: 0ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+
+      .hero__copy,
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="demo-banner" aria-label="Language navigation">
+    <span><span class="ja">Demo Site — Nunen</span><span class="en">Demo Site — Nunen</span></span>
+    <button id="lang-toggle" type="button" aria-label="Switch language">EN</button>
+  </nav>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <img class="hero__image" src="./photos/exterior-dusk-01.jpg" alt="フクギに囲まれ、室内の灯りがともるnunenの外観">
+      <div class="hero__inner">
+        <div class="hero__copy">
+          <p class="kicker"><span class="ja">NUNEN — NAKIJIN, OKINAWA</span><span class="en">NUNEN — NAKIJIN, OKINAWA</span></p>
+          <h1 id="hero-title" class="h-display"><span class="ja"><span class="nowrap">なにもない、</span><span class="nowrap">という</span><span class="nowrap">名前の宿。</span></span><span class="en">Nunen — a place named for nothing.</span></h1>
+          <p class="hero__lead"><span class="ja">nunen＝沖縄の言葉で「なにもない」。今帰仁・今泊のフクギ集落に一棟。</span><span class="en">nunen means "nothing" in the Okinawan dialect. One house in the fukugi grove of Imadomar, Nakijin.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="origin" aria-labelledby="origin-title">
+      <!-- 写真差し込み: 白い漆喰屋根とシーサーを余白の中に小さく置く -->
+      <div class="section-inner">
+        <div class="origin__content reveal">
+          <p class="kicker"><span class="ja">WHY "NUNEN"</span><span class="en">WHY "NUNEN"</span></p>
+          <h2 id="origin-title" class="section-title h-display"><span class="ja">岡本太郎は、<span class="nowrap">それを</span><span class="nowrap">美しさと</span><span class="nowrap">呼んだ。</span></span><span class="en">Taro Okamoto called it beauty.</span></h2>
+          <p class="origin__body"><span class="ja">「何もないことの美しさ」。初めて沖縄を訪れた岡本太郎は、そう書き残した。nunenは、その言葉から名前をもらった。フクギの森の奥で、白い漆喰屋根の下で予定のない時間を過ごす。</span><span class="en">"The beauty of having nothing." Taro Okamoto wrote these words on his first visit to Okinawa. Nunen takes its name from them. In the depths of the fukugi forest, beneath the white plaster roof, time passes without agenda.</span></p>
+          <img class="origin__image" src="./photos/roof-shisa.jpg" alt="nunenの白い漆喰屋根とシーサー" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section id="owner" class="section-owner" aria-labelledby="owner-title">
+      <div class="section-inner">
+        <div class="owner__content reveal">
+          <p class="kicker"><span class="ja">FROM THE OWNER</span><span class="en">FROM THE OWNER</span></p>
+          <h2 id="owner-title" class="section-title h-display"><span class="ja">何もないけど、それが<span class="nowrap">今帰仁村。</span></span><span class="en">Nothing here. That's Nakijin.</span></h2>
+          <p class="owner__body"><span class="ja">沖縄に帰りたくなるような気持ちを大事にしたお宿。そんな今帰仁村を感じにいらしてください。</span><span class="en">This inn was made to carry the feeling of coming back to Okinawa. Please come and feel Nakijin for yourself.</span></p>
+          <p class="owner__source"><span class="ja">— nunen オーナー</span><span class="en">— nunen owner</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="day" aria-labelledby="day-title">
+      <!-- 写真差し込み: 夕方から朝までを、縁側・外観・朝の光でつなぐ -->
+      <div class="section-inner">
+        <header class="day__heading">
+          <p class="kicker"><span class="ja">A DAY AT NUNEN</span><span class="en">A DAY AT NUNEN</span></p>
+          <h2 id="day-title" class="section-title h-display"><span class="ja">夕方からはじまる。</span><span class="en">It begins at dusk.</span></h2>
+        </header>
+        <div class="day-list reveal">
+          <article class="day-row">
+            <figure class="day-row__figure">
+              <img class="day-row__image" src="./photos/engawa-dusk.jpg" alt="夕暮れ時に灯りがともったnunenの縁側" loading="lazy">
+            </figure>
+            <div class="day-row__text">
+              <span class="day-row__number"><span class="ja">15:00</span><span class="en">15:00</span></span>
+              <p><span class="ja">15時、フクギの影が長くなる頃に着く。雨戸を開けると、畳のなつかしい匂いがした。</span><span class="en">Arrive around three, when the fukugi shadows grow long. Open the shutters — the familiar scent of tatami.</span></p>
+            </div>
+          </article>
+          <article class="day-row">
+            <figure class="day-row__figure">
+              <img class="day-row__image" src="./photos/garden-overview.jpg" alt="nunenの庭から眺める夕暮れの空" loading="lazy">
+            </figure>
+            <div class="day-row__text">
+              <span class="day-row__number"><span class="ja">18:30</span><span class="en">18:30</span></span>
+              <p><span class="ja">日が落ちる。障子の内側に灯りがともる。庭に出て空を眺めた。</span><span class="en">The sun goes down. Light glows behind the shoji. Step into the garden and look up at the sky.</span></p>
+            </div>
+          </article>
+          <article class="day-row">
+            <figure class="day-row__figure">
+              <img class="day-row__image" src="./photos/engawa-day-01.jpg" alt="朝の光が差すnunenの縁側" loading="lazy">
+            </figure>
+            <div class="day-row__text">
+              <span class="day-row__number"><span class="ja">07:00</span><span class="en">07:00</span></span>
+              <p><span class="ja">朝は鳥の声で目が覚める。フクギ越しの光を眺めてぼーっとする贅沢な時間。ビーチまでは歩いてすぐ。</span><span class="en">Wake to birdsong. Watch the light filter through the fukugi — the luxury of doing nothing. The beach is a short walk away.</span></p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="honesty paper" aria-labelledby="honesty-title">
+      <!-- 写真差し込み: 縁側の蚊取り線香を、不便を正直に伝える具体として使う -->
+      <div class="section-inner">
+        <div class="honesty__grid reveal">
+          <div class="honesty__copy">
+            <p class="kicker"><span class="ja">HONESTLY</span><span class="en">HONESTLY</span></p>
+            <h2 id="honesty-title" class="section-title h-display"><span class="ja">先に正直に書きます。</span><span class="en">A few things, honestly.</span></h2>
+            <p class="honesty__body"><span class="ja">夏は蚊がいます。蚊取り線香はこちらで用意しています。シャワーは建物の外を回った先にあり、天井は低めです。台所の道具は最新ではありません。それでも来てよかったと言ってもらえています。</span><span class="en">There are mosquitoes in summer. We keep mosquito coils on hand. The shower is outside, around the back of the building, and the ceiling is low. The kitchen tools are not new. Even so, guests say they were glad they came.</span></p>
+            <blockquote class="honesty__quote"><span class="ja">「ここに一度でも来てみなければ、この体験がいかに静寂なものかは到底理解できないでしょう…一生に一度のことです。」</span><span class="en">"Unless you've been here at least once, you simply cannot understand how still and quiet this experience is… It is a once-in-a-lifetime thing."</span></blockquote>
+            <p class="honesty__source" style="font-size:var(--t-label);color:var(--washi-dim);margin-top:8px;"><span class="ja">—— Googleマップ 口コミより</span><span class="en">—— Google Maps review</span></p>
+          </div>
+          <img class="honesty__image" src="./photos/detail-mosquito-pig.jpg" alt="縁側に置かれた蚊取り線香" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section id="house" class="house" aria-labelledby="house-title">
+      <!-- 写真差し込み: 間取り図と台所を並べ、10畳一間の実態を見せる -->
+      <div class="section-inner">
+        <header class="house__heading">
+          <p class="kicker"><span class="ja">THE HOUSE</span><span class="en">THE HOUSE</span></p>
+          <h2 id="house-title" class="section-title h-display"><span class="ja">10畳、一間。</span><span class="en">Ten tatami mats. One room.</span></h2>
+        </header>
+        <div class="house__layout">
+          <div class="house__visuals">
+            <img class="house__room" src="./photos/interior-tatami.jpg" alt="nunenの畳の部屋全景" loading="lazy">
+            <img class="house__plan" src="./photos/madori.png" alt="nunenの10畳一間の間取り図" loading="lazy">
+            <img class="house__kitchen" src="./photos/kitchen-yachimon.jpg" alt="nunenのキッチンとやちむんの棚" loading="lazy">
+          </div>
+          <div>
+            <dl class="info-table">
+              <div class="info-row"><dt><span class="ja">定員</span><span class="en">Capacity</span></dt><dd><span class="ja">最大6名</span><span class="en">Up to 6 guests</span></dd></div>
+              <div class="info-row"><dt><span class="ja">寝具</span><span class="en">Bedding</span></dt><dd><span class="ja">畳に布団</span><span class="en">Futon on tatami</span></dd></div>
+              <div class="info-row"><dt><span class="ja">台所</span><span class="en">Kitchen</span></dt><dd><span class="ja">ガス・冷蔵庫・調理器具・食器</span><span class="en">Gas stove, refrigerator, cookware, tableware</span></dd></div>
+              <div class="info-row"><dt><span class="ja">風呂</span><span class="en">Bath</span></dt><dd><span class="ja">シャワー（屋外通路の先）</span><span class="en">Shower (outdoor passageway)</span></dd></div>
+              <div class="info-row"><dt><span class="ja">庭</span><span class="en">Garden</span></dt><dd><span class="ja">焚き火台・BBQ可</span><span class="en">Fire pit, BBQ available</span></dd></div>
+              <div class="info-row"><dt><span class="ja">駐車場</span><span class="en">Parking</span></dt><dd><span class="ja">あり</span><span class="en">Available</span></dd></div>
+              <div class="info-row"><dt><span class="ja">Wi-Fi・テレビ</span><span class="en">Wi-Fi / TV</span></dt><dd><span class="ja">なし</span><span class="en">Not available</span></dd></div>
+            </dl>
+            <p class="house__note"><span class="ja">ペットの同伴は事前にご相談ください。</span><span class="en">Please contact us in advance if you are bringing a pet.</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="voices" aria-labelledby="voices-title">
+      <!-- 写真差し込み: 写真を置かず、宿泊者の原文を大きな明朝で見せる -->
+      <div class="section-inner">
+        <header class="voices__heading">
+          <p class="kicker"><span class="ja">VOICES</span><span class="en">VOICES</span></p>
+          <h2 id="voices-title" class="section-title h-display"><span class="ja">宿泊者の言葉。</span><span class="en">Words from guests.</span></h2>
+        </header>
+        <div class="voices__list">
+          <article class="voice">
+            <blockquote><span class="ja">「ふくぎの木に囲まれ、美しいビーチまで歩いてすぐ。昔の沖縄にタイムスリップするような体験ができます。沖縄で癒されたいかたにおすすめです❗」</span><span class="en">"Surrounded by fukugi trees, with a beautiful beach just a short walk away. It feels like stepping back in time to old Okinawa. Highly recommended for anyone looking for healing in Okinawa ❗"</span></blockquote>
+          </article>
+          <article class="voice">
+            <blockquote><span class="ja">「沖縄の伝統的な家に泊まってみたい方には、絶対にお勧めです。庭も広くて、焚き火台もあります。」</span><span class="en">"Absolutely recommended for anyone who wants to stay in a traditional Okinawan house. The garden is spacious and there's a fire pit."</span></blockquote>
+          </article>
+        </div>
+        <p class="voices__source"><span class="ja">Google口コミ ★4.6</span><span class="en">Google Maps ★4.6</span></p>
+      </div>
+    </section>
+
+    <section id="access" class="access paper" aria-labelledby="access-title">
+      <!-- 写真差し込み: 写真の代わりに正規Googleマップを大きく配置する -->
+      <div class="section-inner">
+        <header class="access__heading">
+          <p class="kicker"><span class="ja">ACCESS</span><span class="en">ACCESS</span></p>
+          <h2 id="access-title" class="section-title h-display"><span class="ja">フクギの集落まで。</span><span class="en">Getting to the fukugi grove.</span></h2>
+        </header>
+        <div class="access__layout reveal">
+          <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4840.621209640971!2d127.92589087639682!3d26.70187506911768!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34e4f9ce36a7aeb9%3A0xb9ac21b848acfa98!2zbnVuZW4gKOOBrOOAnOOBreOAnOOCkyk!5e1!3m2!1sja!2sjp!4v1781280241795!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="nunen周辺のGoogleマップ"></iframe>
+          </div>
+          <div class="access__details">
+            <dl class="info-table">
+              <div class="info-row"><dt><span class="ja">住所</span><span class="en">Address</span></dt><dd><span class="ja">沖縄県国頭郡今帰仁村今泊3194</span><span class="en">沖縄県国頭郡今帰仁村今泊3194</span></dd></div>
+              <div class="info-row"><dt><span class="ja">那覇空港から</span><span class="en">From Naha Airport</span></dt><dd><span class="ja">沖縄自動車道 → 許田IC → 国道58号・505号 今帰仁方面（約1時間40分）</span><span class="en">Okinawa Expressway → Kyoda IC → Rt. 58 / Rt. 505 toward Nakijin (approx. 1 hr 40 min)</span></dd></div>
+              <div class="info-row"><dt><span class="ja">美ら海水族館から</span><span class="en">From Churaumi Aquarium</span></dt><dd><span class="ja">車 約10分</span><span class="en">Approx. 10 min by car</span></dd></div>
+              <div class="info-row"><dt><span class="ja">今帰仁城跡から</span><span class="en">From Nakijin Castle Ruins</span></dt><dd><span class="ja">車 約5分</span><span class="en">Approx. 5 min by car</span></dd></div>
+              <div class="info-row"><dt><span class="ja">ビーチ</span><span class="en">Beach</span></dt><dd><span class="ja">徒歩すぐ</span><span class="en">Short walk</span></dd></div>
+              <div class="info-row"><dt><span class="ja">スーパー</span><span class="en">Supermarket</span></dt><dd><span class="ja">徒歩圏</span><span class="en">Walking distance</span></dd></div>
+              <div class="info-row"><dt><span class="ja">チェックイン</span><span class="en">Check-in</span></dt><dd><span class="ja">15:00〜18:00</span><span class="en">15:00〜18:00</span></dd></div>
+              <div class="info-row"><dt><span class="ja">チェックアウト</span><span class="en">Check-out</span></dt><dd><span class="ja">12:00</span><span class="en">12:00</span></dd></div>
+              <div class="info-row"><dt><span class="ja">駐車場</span><span class="en">Parking</span></dt><dd><span class="ja">あり</span><span class="en">Available</span></dd></div>
+            </dl>
+          </div>
+        </div>
+        <aside class="nearby">
+              <div class="ja">
+                <p class="kicker">NEARBY</p>
+                <h3 class="nearby__title h-display">オーナーの近所案内</h3>
+                <div class="nearby__list">
+                  <article class="nearby__item">
+                    <div>
+                      <p class="nearby__name">Lucian Blue <span class="nearby__distance">｜ 徒歩5分</span></p>
+                      <p class="nearby__description">ご夫婦のカフェ。コーヒーと沖縄の作家さんの作品も</p>
+                    </div>
+                    <img class="nearby__image" src="./photos/cafe-lucian-blue.jpg" alt="Lucian Blue カフェ外観" loading="lazy">
+                  </article>
+                  <article class="nearby__item">
+                    <div>
+                      <p class="nearby__name">One Eighty South <span class="nearby__distance">｜ 車4分</span></p>
+                      <p class="nearby__description">ペット可。看板犬のロジャーがいます</p>
+                    </div>
+                    <img class="nearby__image" src="./photos/cafe-one-eighty-south.jpg" alt="One Eighty Southのカフェ" loading="lazy">
+                  </article>
+                  <article class="nearby__item">
+                    <div>
+                      <p class="nearby__name">やちむん工房 エドメ <span class="nearby__distance">｜ 徒歩5分</span></p>
+                      <p class="nearby__description">宿に置いているやちむんの作家さんの工房</p>
+                    </div>
+                    <img class="nearby__image" src="./photos/yachimon.jpg" alt="やちむん工房 エドメの器" loading="lazy">
+                  </article>
+                </div>
+              </div>
+              <div class="en">
+                <p class="kicker">NEARBY</p>
+                <h3 class="nearby__title h-display">Owner's neighborhood picks</h3>
+                <div class="nearby__list">
+                  <article class="nearby__item">
+                    <div>
+                      <p class="nearby__name">Lucian Blue <span class="nearby__distance">｜ 5-min walk</span></p>
+                      <p class="nearby__description">A couple-run café with coffee and Okinawan craft artists' work</p>
+                    </div>
+                    <img class="nearby__image" src="./photos/cafe-lucian-blue.jpg" alt="Lucian Blue カフェ外観" loading="lazy">
+                  </article>
+                  <article class="nearby__item">
+                    <div>
+                      <p class="nearby__name">One Eighty South <span class="nearby__distance">｜ 4 min by car</span></p>
+                      <p class="nearby__description">Pet-friendly. Resident dog Roger is waiting.</p>
+                    </div>
+                    <img class="nearby__image" src="./photos/cafe-one-eighty-south.jpg" alt="One Eighty South café" loading="lazy">
+                  </article>
+                  <article class="nearby__item">
+                    <div>
+                      <p class="nearby__name">Edmé pottery studio <span class="nearby__distance">｜ 5-min walk</span></p>
+                      <p class="nearby__description">The workshop of the potter behind the cups in your kitchen</p>
+                    </div>
+                    <img class="nearby__image" src="./photos/yachimon.jpg" alt="Pottery by Edmé pottery studio" loading="lazy">
+                  </article>
+                </div>
+              </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="cta" aria-labelledby="cta-title">
+      <!-- 写真差し込み: 写真を置かず、藍墨の余白と琥珀のボタンだけで締める -->
+      <div class="section-inner cta__inner">
+        <h2 id="cta-title" class="h-display"><span class="ja">なにもない一晩を、どうぞ。</span><span class="en">A night of nothing. Yours.</span></h2>
+        <a class="cta__button" href="https://nunen.jimdofree.com/" target="_blank" rel="noopener noreferrer"><span class="ja">予約・空室の問い合わせ</span><span class="en">Reserve / Inquire</span></a>
+        <p class="cta__note"><span class="ja">ご質問だけでも構いません。</span><span class="en">Questions alone are welcome.</span></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><span class="ja">NUNEN — NAKIJIN, OKINAWA</span><span class="en">NUNEN — NAKIJIN, OKINAWA</span></footer>
+
+  <script>
+    const langToggle = document.getElementById("lang-toggle");
+    const revealItems = document.querySelectorAll(".reveal");
+
+    langToggle.addEventListener("click", () => {
+      const nextLanguage = document.documentElement.lang === "ja" ? "en" : "ja";
+      document.documentElement.lang = nextLanguage;
+      langToggle.textContent = nextLanguage === "ja" ? "EN" : "JA";
+    });
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.12 });
+
+      revealItems.forEach((item) => observer.observe(item));
+    } else {
+      revealItems.forEach((item) => item.classList.add("is-visible"));
+    }
+  </script>
+</body>
+</html>
